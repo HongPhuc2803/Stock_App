@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartStock - Stock Adjustment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "tertiary-fixed": "#ffddb8",
+                      "background": "#f8f9ff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-container": "#00714d",
+                      "secondary-container": "#6cf8bb",
+                      "tertiary": "#784b00",
+                      "surface-dim": "#cbdbf5",
+                      "on-primary": "#ffffff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-surface-variant": "#434655",
+                      "surface-tint": "#0053db",
+                      "outline": "#737686",
+                      "tertiary-container": "#996100",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "outline-variant": "#c3c6d7",
+                      "secondary": "#006c49",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface": "#f8f9ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "tertiary-fixed-dim": "#ffb95f",
+                      "on-background": "#0b1c30",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#f8f9ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#e5eeff",
+                      "inverse-primary": "#b4c5ff",
+                      "on-error": "#ffffff",
+                      "surface-container-low": "#eff4ff",
+                      "on-tertiary-container": "#ffeedd",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#dce9ff",
+                      "on-secondary-fixed": "#002113",
+                      "on-tertiary-fixed": "#2a1700",
+                      "inverse-surface": "#213145",
+                      "surface-variant": "#d3e4fe",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-surface": "#0b1c30",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#2563eb",
+                      "secondary-fixed": "#6ffbbe",
+                      "on-primary-fixed": "#00174b",
+                      "primary-fixed": "#dbe1ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "primary": "#004ac6",
+                      "on-primary-container": "#eeefff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "edge-margin": "16px",
+                      "md": "16px",
+                      "gutter": "12px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "display-md": [
+                              "Inter"
+                      ],
+                      "stats-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "stats-lg": [
+                              "28px",
+                              {
+                                      "lineHeight": "34px",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body { background-color: #F8FAFC; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined[data-weight="fill"] { font-variation-settings: 'FILL' 1; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col pb-safe">
+<!-- TopAppBar -->
+<header class="w-full top-0 bg-surface dark:bg-surface-container-low shadow-sm flex justify-between items-center px-edge-margin py-sm w-full sticky z-40">
+<div class="flex items-center gap-md text-primary dark:text-primary-fixed-dim">
+<button class="p-2 -ml-2 rounded-full hover:bg-surface-container-high transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<h1 class="font-display-md text-display-md text-primary dark:text-primary-fixed font-bold tracking-tight">SmartStock</h1>
+</div>
+<div class="flex items-center">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-outline-variant bg-surface-container cursor-pointer hover:bg-surface-container-high transition-colors">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A clean, professional headshot of a young inventory manager smiling slightly, wearing a sharp blue button-down shirt against a pure white background with subtle studio lighting emphasizing clarity and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkSgIdM-PYWAhmb8E61GnHxsWYzvb1ESDP5WQCpz7PKdRVr0kTwTrw6dMX9Rq-gdYmJwy9pW7xEps2Mnzo9aUaU24qBE_6vV0JTvhzJA5NS9BHTbAW1ZGWO_P0lv8-Dat60t2pdyDHJJVnEDQc1mXxC0UUOSKJCpCSKGwLwllwQsP5ZkTxvciaknZ0siqu4pi1K63peIZ32UvfXpAFidZmDcMhM6b4RK7ByOvnx-oiBF1za9Wyg-q8"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow container mx-auto px-edge-margin py-lg max-w-3xl">
+<div class="mb-lg">
+<div class="flex items-center gap-sm text-on-surface-variant mb-xs">
+<span class="material-symbols-outlined text-[20px]">arrow_back</span>
+<a class="font-body-md text-body-md hover:text-primary transition-colors" href="#">Back to Inventory</a>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-background">Stock Adjustment</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Manually correct stock levels for discrepancies.</p>
+</div>
+<form class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 p-lg flex flex-col gap-lg">
+<!-- Section 1: Product Selection -->
+<fieldset class="flex flex-col gap-sm">
+<legend class="font-label-md text-label-md text-on-background uppercase tracking-wider mb-sm pb-xs border-b border-outline-variant/20 w-full text-left">1. Select Product</legend>
+<div class="relative">
+<label class="font-label-md text-label-md text-on-surface-variant block mb-xs" for="product-search">Search Product</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-sm py-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-body-md text-on-background" id="product-search" placeholder="Scan barcode or type name/SKU..." type="text" value="Premium Arabica Coffee Beans (1kg)"/>
+</div>
+</div>
+<!-- Selected Product Card -->
+<div class="mt-sm p-gutter bg-surface-container-low rounded-lg border border-outline-variant/50 flex items-start gap-md">
+<div class="w-12 h-12 rounded bg-surface-variant flex-shrink-0 border border-outline-variant/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A meticulously lit, high-resolution product shot of a sleek, matte black 1kg bag of premium Arabica coffee beans sitting on a pristine white surface, casting a soft, perfectly diffused shadow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoibRe69Tv0Molvmtcc3dIc8WNjU4OZCWIwvyXP9p18sJ27otp7HZSAYbDokhe1cyN2UdrCBvCz7xx_haL974Y2C5ST2cCWk7CzevOgRHXqMkNM8UkwcwmG4J_S48eul3DRbfaBxDqD4kRNbP_14yfxk74MXYbVNkXohNMQr_mKBaDlqpwVXB5H3S_uedOk0jfl5brMfolJ16f1fSfmC_PgI2onFfcNCDwp86Dq7K1FdCesOejv2BM"/>
+</div>
+<div class="flex-grow">
+<h3 class="font-body-md text-body-md font-semibold text-on-background">Premium Arabica Coffee Beans (1kg)</h3>
+<p class="font-label-md text-label-md text-on-surface-variant mt-xs">SKU: COF-ARB-1KG-01</p>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface-variant">Current Qty</p>
+<p class="font-headline-sm text-headline-sm font-bold text-on-background">142</p>
+</div>
+</div>
+</fieldset>
+<!-- Section 2: Adjustment Details -->
+<fieldset class="flex flex-col gap-md">
+<legend class="font-label-md text-label-md text-on-background uppercase tracking-wider mb-sm pb-xs border-b border-outline-variant/20 w-full text-left">2. Adjustment Details</legend>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Adjustment Quantity -->
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-xs">New Quantity</label>
+<div class="flex items-center gap-sm">
+<button aria-label="Decrease quantity" class="w-10 h-10 rounded-lg border border-outline-variant bg-surface hover:bg-surface-container transition-colors flex items-center justify-center text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/20" type="button">
+<span class="material-symbols-outlined text-[20px]">remove</span>
+</button>
+<div class="relative flex-grow">
+<input class="w-full text-center py-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-body-md font-semibold text-on-background" id="adj-quantity" type="number" value="138"/>
+</div>
+<button aria-label="Increase quantity" class="w-10 h-10 rounded-lg border border-outline-variant bg-surface hover:bg-surface-container transition-colors flex items-center justify-center text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary/20" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<div class="mt-xs text-right">
+<span class="font-label-md text-label-md text-error flex items-center justify-end gap-xs">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+                                 Net Adjustment: -4
+                             </span>
+</div>
+</div>
+<!-- Reason Dropdown -->
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-xs" for="adj-reason">Reason for Adjustment</label>
+<div class="relative">
+<select class="w-full appearance-none pl-sm pr-xl py-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-body-md text-on-background cursor-pointer" id="adj-reason">
+<option disabled="" value="">Select reason...</option>
+<option selected="" value="damaged">Damaged in transit</option>
+<option value="lost">Lost/Missing</option>
+<option value="expired">Expired/Spoiled</option>
+<option value="manual">Manual Count Correction</option>
+<option value="other">Other</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+</div>
+<!-- Notes Field -->
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-xs" for="adj-notes">Additional Notes (Optional)</label>
+<textarea class="w-full p-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all font-body-md text-body-md text-on-background resize-none" id="adj-notes" placeholder="Enter details about this adjustment..." rows="3">Found 4 bags with torn packaging during morning stock check.</textarea>
+</div>
+</fieldset>
+<!-- Actions -->
+<div class="pt-md border-t border-outline-variant/30 flex justify-end gap-sm mt-sm">
+<button class="px-lg py-sm rounded-lg font-label-md text-label-md text-on-surface bg-surface border border-outline-variant hover:bg-surface-container transition-colors focus:outline-none focus:ring-2 focus:ring-outline/20" type="button">
+                    Cancel
+                </button>
+<button class="px-lg py-sm rounded-lg font-label-md text-label-md text-on-primary bg-primary-container hover:bg-primary-fixed-dim hover:text-on-primary-fixed transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 flex items-center gap-xs shadow-sm" type="submit">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    Confirm Adjustment
+                </button>
+</div>
+</form>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-md py-xs pb-safe bg-surface/80 dark:bg-surface-container-lowest/80 backdrop-blur-md border-t border-outline-variant dark:border-outline shadow-lg z-50 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 w-16 h-12" href="#">
+<span class="material-symbols-outlined mb-1">dashboard</span>
+<span class="font-label-md text-label-md text-[10px]">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 w-16 h-12" href="#">
+<span class="material-symbols-outlined mb-1">inventory_2</span>
+<span class="font-label-md text-label-md text-[10px]">Products</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 w-16 h-12" href="#">
+<span class="material-symbols-outlined mb-1">point_of_sale</span>
+<span class="font-label-md text-label-md text-[10px]">Sell</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary after:rounded-full active:scale-95 transition-transform duration-150 w-16 h-12" href="#">
+<span class="material-symbols-outlined mb-1" data-weight="fill">shelves</span>
+<span class="font-label-md text-label-md text-[10px]">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 w-16 h-12" href="#">
+<span class="material-symbols-outlined mb-1">receipt_long</span>
+<span class="font-label-md text-label-md text-[10px]">Orders</span>
+</a>
+</nav>
+<!-- Spacer for mobile bottom nav -->
+<div class="h-16 md:hidden"></div>
+</body></html>

@@ -1,0 +1,110 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function profile() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    function memberOf(storeId) {
+      return signedIn() && profile().isActive == true && profile().storeId == storeId;
+    }
+    function roleIs(role) { return profile().role == role; }
+    function ownerOf(storeId) { return memberOf(storeId) && roleIs('OWNER'); }
+    function inventoryManagerOf(storeId) {
+      return memberOf(storeId) &&
+        (roleIs('OWNER') || roleIs('WAREHOUSE_MANAGER'));
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn() &&
+        (userId == request.auth.uid || memberOf(resource.data.storeId));
+      allow create: if signedIn() &&
+        ((userId == request.auth.uid &&
+          request.resource.data.uid == request.auth.uid) ||
+         ownerOf(request.resource.data.storeId));
+      allow update: if signedIn() &&
+        ((userId == request.auth.uid &&
+         request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['name', 'avatarUrl', 'phone',
+              'notificationPreferences', 'updatedAt'])) ||
+         (ownerOf(resource.data.storeId) && resource.data.role != 'OWNER' &&
+          request.resource.data.storeId == resource.data.storeId &&
+          request.resource.data.role in ['STAFF', 'WAREHOUSE_MANAGER'] &&
+          request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['name', 'role', 'isActive', 'updatedAt'])));
+    }
+
+    match /stores/{storeId} {
+      allow read: if memberOf(storeId);
+      allow create: if signedIn() && request.resource.data.ownerId == request.auth.uid;
+      allow update: if ownerOf(storeId) &&
+        request.resource.data.ownerId == resource.data.ownerId;
+    }
+
+    match /categories/{id} {
+      allow read: if memberOf(resource.data.storeId);
+      allow create: if ownerOf(request.resource.data.storeId);
+      allow update: if ownerOf(resource.data.storeId) &&
+        request.resource.data.storeId == resource.data.storeId;
+    }
+
+    match /products/{id} {
+      allow read: if memberOf(resource.data.storeId);
+      allow create: if ownerOf(request.resource.data.storeId);
+      allow update: if ownerOf(resource.data.storeId) &&
+        request.resource.data.storeId == resource.data.storeId;
+    }
+
+    match /variants/{id} {
+      allow read: if memberOf(resource.data.storeId);
+      allow create: if ownerOf(request.resource.data.storeId);
+      allow update: if request.resource.data.storeId == resource.data.storeId &&
+        request.resource.data.stock >= 0 &&
+        (inventoryManagerOf(resource.data.storeId) ||
+          (memberOf(resource.data.storeId) && roleIs('STAFF') &&
+            request.resource.data.diff(resource.data).affectedKeys().hasOnly(['stock'])) ||
+          ownerOf(resource.data.storeId));
+    }
+
+    match /inventory_transactions/{id} {
+      allow read: if memberOf(resource.data.storeId);
+      allow create: if memberOf(request.resource.data.storeId) &&
+        request.resource.data.createdBy == request.auth.uid;
+    }
+
+    match /orders/{id} {
+      allow read: if memberOf(resource.data.storeId);
+      allow create: if memberOf(request.resource.data.storeId) &&
+        request.resource.data.createdBy == request.auth.uid &&
+        request.resource.data.total >= 0;
+    }
+
+    match /customers/{id} {
+      allow read: if memberOf(resource.data.storeId);
+      allow create: if memberOf(request.resource.data.storeId) &&
+        (roleIs('OWNER') || roleIs('STAFF'));
+      allow update: if memberOf(resource.data.storeId) &&
+        request.resource.data.storeId == resource.data.storeId &&
+        (roleIs('OWNER') || roleIs('STAFF'));
+    }
+
+    match /notifications/{id} {
+      allow read: if memberOf(resource.data.storeId);
+      allow update: if memberOf(resource.data.storeId) &&
+        request.resource.data.storeId == resource.data.storeId &&
+        request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['isRead']);
+      allow create: if memberOf(request.resource.data.storeId);
+    }
+
+    match /audit_logs/{id} {
+      allow read: if ownerOf(resource.data.storeId);
+      allow create: if ownerOf(request.resource.data.storeId) &&
+        request.resource.data.actorId == request.auth.uid;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

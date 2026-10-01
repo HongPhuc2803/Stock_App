@@ -45,5 +45,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>SmartStock cần truy cập thư viện ảnh để chọn ảnh sản phẩm.</string>
 </dict>
 </plist>

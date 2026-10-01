@@ -1,16 +1,16 @@
-# smartstock
+# SmartStock
 
-A new Flutter project.
+Ứng dụng Flutter quản lý sản phẩm, tồn kho, POS, đơn hàng, khách hàng, nhân viên,
+dashboard và báo cáo cho cửa hàng.
 
-## Getting Started
+Xem hướng dẫn đầy đủ tại
+[`docs/setup_run_release_guide.md`](docs/setup_run_release_guide.md).
 
-This project is a starting point for a Flutter application.
+Chạy nhanh:
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```powershell
+flutter pub get
+flutter analyze
+flutter test
+flutter run -d chrome
+```

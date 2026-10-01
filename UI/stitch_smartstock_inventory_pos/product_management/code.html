@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartStock - Product Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#e5eeff",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#996100",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#004ac6",
+                        "surface-container-low": "#eff4ff",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#ffeedd",
+                        "tertiary": "#784b00",
+                        "outline-variant": "#c3c6d7",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dbe1ff",
+                        "background": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#006c49",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#dce9ff",
+                        "on-secondary-fixed": "#002113",
+                        "secondary-fixed-dim": "#4edea3",
+                        "inverse-primary": "#b4c5ff",
+                        "on-primary-fixed": "#00174b",
+                        "on-surface": "#0b1c30",
+                        "surface-dim": "#cbdbf5",
+                        "tertiary-fixed": "#ffddb8",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-bright": "#f8f9ff",
+                        "surface-variant": "#d3e4fe",
+                        "outline": "#737686",
+                        "surface": "#f8f9ff",
+                        "primary-container": "#2563eb",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-surface-variant": "#434655",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#00714d",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-background": "#0b1c30",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#eaf1ff",
+                        "inverse-surface": "#213145",
+                        "on-primary-container": "#eeefff",
+                        "secondary-container": "#6cf8bb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "gutter": "12px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "edge-margin": "16px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "stats-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "stats-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24 md:pb-0 pt-16">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface shadow-sm flex justify-between items-center px-edge-margin h-16">
+<button class="text-primary hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 duration-100 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="text-display-md font-display-md text-primary">SmartStock</h1>
+<button class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden hover:bg-surface-container-high transition-colors active:scale-95 duration-100 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a person, likely a small business owner, looking confident in a well-lit, modern office environment. The lighting is soft and flattering, casting subtle shadows to emphasize a clean, corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4v4fcxCLb7hcDt6fv0EuCngjUO5fYcEgC4AGtu-BBPwO9TjYQWyVdxcZEHmW3gH39VysF3PiaK6OxVU3uaHeBLybLtK0RfPXeVkc-4T8wb_QsywwcHf9wujDz_cTfWSdbygfDpt4Da845ZdQQSodiRvrGBEDuGfFq0u6RD_qbFCOPh8y2uNANiOh5OqRKAc_Bjxk8_y7NpUw1FoSLSI8mHhcdi7YJ5itLpfw3uUMVfleMwjRPI4W8"/>
+</button>
+</header>
+<!-- Main Content -->
+<main class="px-edge-margin max-w-5xl mx-auto md:pt-lg">
+<!-- Search and Filter Bar -->
+<div class="flex items-center gap-sm mt-lg mb-md">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-body-md font-body-md focus:border-primary focus:ring-4 focus:ring-primary/10 transition-shadow outline-none" placeholder="Search products..." type="text"/>
+</div>
+<button class="bg-surface-container-lowest border border-outline-variant p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-sm overflow-x-auto pb-sm mb-lg no-scrollbar">
+<button class="whitespace-nowrap px-4 py-1.5 bg-primary-container text-on-primary rounded-full text-label-md font-label-md">All</button>
+<button class="whitespace-nowrap px-4 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface-variant rounded-full text-label-md font-label-md hover:bg-surface-container-low">Category</button>
+<button class="whitespace-nowrap px-4 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface-variant rounded-full text-label-md font-label-md hover:bg-surface-container-low">Stock Status</button>
+<button class="whitespace-nowrap px-4 py-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface-variant rounded-full text-label-md font-label-md hover:bg-surface-container-low">Price</button>
+</div>
+<!-- Product List (Bento-ish grid for desktop, list for mobile) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-gutter border border-outline-variant shadow-[0_1px_3px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row gap-sm items-start sm:items-center">
+<div class="w-full sm:w-24 h-24 bg-surface-container rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A sleek, modern smartphone, specifically resembling an iPhone 15 Pro, presented against a clean white background. The lighting highlights the metallic edges and smooth glass back, emphasizing a premium, high-tech corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQxra7G52gUf5WhOG5L_3EStlNx_oHPH_sjeHQBcw5gouWpzfHaqo9WvBRQUzrr6CxlEaJVsVvCRWj_FX_mlsJbut5a6F6FKRxhrzeH46YAgTAiYhQ09z5o1zH7Dw_DQhiBPOl-VFjkahxeB0sEUKzYOLkx45Mhsy3DZJ3wQJ0C9TgwberWbL4jBfK9V-6qByrEbK8Pb15fYZ8O6d-QcQ0pbn9ciQiuJvYoHgsrE2RZAzd1jQuzva2"/>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between h-full w-full">
+<div class="flex justify-between items-start w-full">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-background truncate">iPhone 15 Pro</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Electronics</p>
+</div>
+<div class="flex gap-xs">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="p-1 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</div>
+</div>
+<div class="flex justify-between items-end mt-sm w-full">
+<span class="text-stats-lg font-stats-lg text-on-background">$999</span>
+<div class="px-2 py-1 bg-secondary-container/20 text-on-secondary-container rounded text-label-md font-label-md flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                            Stock: 15
+                        </div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-gutter border border-outline-variant shadow-[0_1px_3px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row gap-sm items-start sm:items-center">
+<div class="w-full sm:w-24 h-24 bg-surface-container rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A pair of premium over-ear headphones, specifically resembling Sony WH-1000XM5, resting on a stark white surface. The minimalist setup and soft, diffuse lighting focus purely on the product design, fitting a professional retail inventory context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOKbAcAyUt-R0yuu1unbgQVY8y9lLSuKLvt457Gj8xBSyHKOMUBro69wQgcc8vS_2hC9kykPvhlJfXDz9-QIZTf7O0u7-gTkFjN1nnbA9KJFSz7AFB6U-bxUidHxyKrYSHfeqNNRtteL0O4YJP1O7nRWVKfuBIGcoF5bVgD5BBfjcRFLWbFsiioSwgqiPgjckHglNJStA_A1C5FOuVU-BLV3BdAbj_VHllkYl9JtpolnKMjtHVcIis"/>
+</div>
+<div class="flex-1 min-w-0 flex flex-col justify-between h-full w-full">
+<div class="flex justify-between items-start w-full">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-background truncate">Sony WH-1000XM5</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Audio</p>
+</div>
+<div class="flex gap-xs">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="p-1 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</div>
+</div>
+<div class="flex justify-between items-end mt-sm w-full">
+<span class="text-stats-lg font-stats-lg text-on-background">$349</span>
+<div class="px-2 py-1 bg-tertiary-container/20 text-tertiary rounded text-label-md font-label-md flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+                            Stock: 8 (Low)
+                        </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 md:bottom-8 right-edge-margin w-14 h-14 bg-primary-container text-on-primary rounded-2xl shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)] flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-40">
+<span class="material-symbols-outlined" style="font-size: 28px;">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-sm pb-safe h-20 bg-surface/80 backdrop-blur-md shadow-[0_-1px_3px_rgba(0,0,0,0.05)]">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-90 transition-transform duration-200 w-16 h-14 rounded-xl">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-primary font-bold bg-primary-container/10 active:scale-90 transition-transform duration-200 w-16 h-14 rounded-xl px-2 relative">
+<span class="material-symbols-outlined mb-1" data-icon="inventory_2" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="text-label-md font-label-md">Products</span>
+<span class="absolute bottom-1 w-1 h-1 bg-primary rounded-full"></span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-90 transition-transform duration-200 w-16 h-14 rounded-xl">
+<span class="material-symbols-outlined mb-1" data-icon="point_of_sale">point_of_sale</span>
+<span class="text-label-md font-label-md">Sell</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-90 transition-transform duration-200 w-16 h-14 rounded-xl">
+<span class="material-symbols-outlined mb-1" data-icon="shelves">shelves</span>
+<span class="text-label-md font-label-md">Inventory</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low active:scale-90 transition-transform duration-200 w-16 h-14 rounded-xl">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long">receipt_long</span>
+<span class="text-label-md font-label-md">Orders</span>
+</button>
+</nav>
+</body></html>

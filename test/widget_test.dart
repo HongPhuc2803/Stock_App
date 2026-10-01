@@ -8,23 +8,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:smartstock/main.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:smartstock/app/app.dart';
+import 'package:smartstock/features/auth/domain/entities/app_user.dart';
+import 'package:smartstock/features/auth/presentation/providers/auth_providers.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('SmartStockApp smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          authStateChangesProvider.overrideWith(
+            (ref) => const Stream<AppUser?>.empty(),
+          ),
+        ],
+        child: const SmartStockApp(),
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify app title or loading indicator
+    expect(find.byType(CircularProgressIndicator), findsOneWidget);
   });
 }

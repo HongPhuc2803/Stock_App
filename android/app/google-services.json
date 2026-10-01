@@ -12,7 +12,12 @@
           "package_name": "com.example.smartstock"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "264272357870-03upasu17f2u2dgvtodic8mcuibj96sc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAH32zwOPRKgGPTWhVMDA3xl8olq1prnt4"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264272357870-03upasu17f2u2dgvtodic8mcuibj96sc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "264272357870-fuhp8duvba2ikaru3bvv6m0ap4k7cod9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.smartstock"
+              }
+            }
+          ]
         }
       }
     }

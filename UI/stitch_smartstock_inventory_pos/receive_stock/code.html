@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SmartStock - Receive Stock</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "tertiary-fixed": "#ffddb8",
+                      "background": "#f8f9ff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-container": "#00714d",
+                      "secondary-container": "#6cf8bb",
+                      "tertiary": "#784b00",
+                      "surface-dim": "#cbdbf5",
+                      "on-primary": "#ffffff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-surface-variant": "#434655",
+                      "surface-tint": "#0053db",
+                      "outline": "#737686",
+                      "tertiary-container": "#996100",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "outline-variant": "#c3c6d7",
+                      "secondary": "#006c49",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface": "#f8f9ff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "tertiary-fixed-dim": "#ffb95f",
+                      "on-background": "#0b1c30",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#f8f9ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#e5eeff",
+                      "inverse-primary": "#b4c5ff",
+                      "on-error": "#ffffff",
+                      "surface-container-low": "#eff4ff",
+                      "on-tertiary-container": "#ffeedd",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#dce9ff",
+                      "on-secondary-fixed": "#002113",
+                      "on-tertiary-fixed": "#2a1700",
+                      "inverse-surface": "#213145",
+                      "surface-variant": "#d3e4fe",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-surface": "#0b1c30",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#2563eb",
+                      "secondary-fixed": "#6ffbbe",
+                      "on-primary-fixed": "#00174b",
+                      "primary-fixed": "#dbe1ff",
+                      "surface-container-highest": "#d3e4fe",
+                      "primary": "#004ac6",
+                      "on-primary-container": "#eeefff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "edge-margin": "16px",
+                      "md": "16px",
+                      "gutter": "12px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "display-md": [
+                              "Inter"
+                      ],
+                      "stats-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "stats-lg": [
+                              "28px",
+                              {
+                                      "lineHeight": "34px",
+                                      "letterSpacing": "-0.03em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md h-screen flex flex-col md:flex-row overflow-hidden">
+<!-- Desktop Sidebar (Hidden on mobile) -->
+<aside class="hidden md:flex flex-col w-64 bg-surface-container-lowest border-r border-outline-variant h-full p-md z-10 shadow-sm">
+<div class="mb-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">inventory</span>
+<span class="font-display-md text-display-md text-primary font-bold">SmartStock</span>
+</div>
+<nav class="flex-1 flex flex-col gap-sm">
+<a class="flex items-center gap-md px-sm py-gutter rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-lg text-body-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-sm py-gutter rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-lg text-body-lg">Products</span>
+</a>
+<a class="flex items-center gap-md px-sm py-gutter rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">point_of_sale</span>
+<span class="font-body-lg text-body-lg">Sell</span>
+</a>
+<a class="flex items-center gap-md px-sm py-gutter rounded-lg bg-primary-container text-on-primary-container font-bold transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shelves</span>
+<span class="font-body-lg text-body-lg">Inventory</span>
+</a>
+<a class="flex items-center gap-md px-sm py-gutter rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-body-lg text-body-lg">Orders</span>
+</a>
+</nav>
+<div class="mt-auto flex items-center gap-sm pt-md border-t border-outline-variant">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a warehouse manager in a bright, modern logistics center. The lighting is high-key and clean. The manager wears a simple polo shirt. The aesthetic is corporate and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbIuBhHHGfxqyNytrzTxa0bgzfr28NN4Uhhf2W57E5k_0ITja6I3vu4CxrHAEv1e1wLhVRqvGxYaH79agEiPxuBRhwCYEjQjKw5A9EivlsnkYhTRZ2hCcCbi2OcURfDpRoQM0GbXZVDhOXNW3NyRPjWXgAwpBesLOUvkGQt5AXWuMXdvWOp4jhlVUNlqoSWD3yKdEwyQ4L3S-AbQm_RuxZ257Kcrjb2Hv80vyo9vtfer5bKlilPZJz"/>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">John Manager</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-normal">Warehouse</span>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- TopAppBar (Mobile & Desktop) -->
+<header class="w-full top-0 bg-surface shadow-sm flex justify-between items-center px-edge-margin py-sm w-full z-20 md:hidden">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant">menu</span>
+<span class="font-display-md text-display-md text-primary font-bold">SmartStock</span>
+</div>
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of a warehouse manager in a bright, modern logistics center. The lighting is high-key and clean. The manager wears a simple polo shirt. The aesthetic is corporate and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfDr4SPzPB72_rfy_TgfitaFKFIZNm3Ru9L85wyQ9Ylw2_GZv6w5d9N6a1xAixqVKuiIkfrBQvicz83xLcSZpei1Vuej1-lLLV_shnHgJ8yjUE5SRcB3CJk-XM66KWe_Mk7-82mgwqR_paoLfswj074YnmO73XOPTM6q4_YjYJ52dZYdW6dd2UdBY6y4SRltjhAIQgI5lE2-WFzehdf8H-Psnf8ejerkdNOccFbQQ9BGWQhPmeGMEq"/>
+</header>
+<header class="hidden md:flex w-full top-0 bg-surface shadow-sm justify-between items-center px-edge-margin py-sm w-full z-20">
+<div class="flex items-center gap-sm">
+<span class="font-headline-sm text-headline-sm text-on-surface">Receive Stock</span>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:bg-surface-container-high p-sm rounded-full transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-high p-sm rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto p-edge-margin md:p-xl bg-[#F8FAFC]">
+<div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Form Section -->
+<section class="lg:col-span-2 flex flex-col gap-lg">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-md md:p-lg">
+<div class="mb-md">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-xs">New Stock Entry</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Record incoming inventory from suppliers to update central stock levels.</p>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Supplier -->
+<div class="md:col-span-2 flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Supplier</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">local_shipping</span>
+<select class="w-full pl-xl pr-sm py-sm border border-outline-variant rounded-lg font-body-md text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring focus:ring-primary-container focus:ring-opacity-10 appearance-none">
+<option disabled="" selected="" value="">Select Supplier...</option>
+<option value="apple">Apple Inc.</option>
+<option value="samsung">Samsung Electronics</option>
+<option value="sony">Sony Corp</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Product -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Product</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">inventory_2</span>
+<select class="w-full pl-xl pr-sm py-sm border border-outline-variant rounded-lg font-body-md text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring focus:ring-primary-container focus:ring-opacity-10 appearance-none">
+<option disabled="" selected="" value="">Select Product...</option>
+<option value="p1">MacBook Pro 16"</option>
+<option value="p2">iPhone 15 Pro</option>
+<option value="p3">AirPods Max</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Variant -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Variant / SKU</label>
+<input class="w-full px-sm py-sm border border-outline-variant rounded-lg font-body-md text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring focus:ring-primary-container focus:ring-opacity-10" placeholder="e.g. Space Gray / 1TB" type="text"/>
+</div>
+<!-- Quantity -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Quantity Received</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">tag</span>
+<input class="w-full pl-xl pr-sm py-sm border border-outline-variant rounded-lg font-body-md text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring focus:ring-primary-container focus:ring-opacity-10" placeholder="0" type="number"/>
+</div>
+</div>
+<!-- Purchase Cost -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Unit Purchase Cost</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">attach_money</span>
+<input class="w-full pl-xl pr-sm py-sm border border-outline-variant rounded-lg font-body-md text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring focus:ring-primary-container focus:ring-opacity-10" placeholder="0.00" step="0.01" type="number"/>
+</div>
+</div>
+<!-- Date -->
+<div class="md:col-span-2 flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Receiving Date</label>
+<div class="relative w-full md:w-1/2">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">calendar_today</span>
+<input class="w-full pl-xl pr-sm py-sm border border-outline-variant rounded-lg font-body-md text-body-md bg-surface-container-lowest focus:border-primary-container focus:ring focus:ring-primary-container focus:ring-opacity-10 text-on-surface" type="date"/>
+</div>
+</div>
+<!-- Action -->
+<div class="md:col-span-2 mt-sm flex justify-end">
+<button class="bg-primary-container text-on-primary font-label-md text-label-md px-xl py-sm rounded-lg hover:bg-primary transition-colors flex items-center gap-xs shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)]" type="button">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Confirm Receive
+                                </button>
+</div>
+</form>
+</div>
+</section>
+<!-- Sidebar Timeline Section -->
+<section class="lg:col-span-1 flex flex-col gap-lg">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-md flex flex-col h-full">
+<div class="mb-md flex justify-between items-center border-b border-outline-variant pb-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Recent Imports</h3>
+<button class="text-primary-container text-body-md font-label-md hover:underline">View All</button>
+</div>
+<div class="flex-1 flex flex-col gap-md relative">
+<!-- Timeline line -->
+<div class="absolute left-4 top-2 bottom-2 w-0.5 bg-outline-variant z-0"></div>
+<!-- Item 1 -->
+<div class="relative z-10 flex gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center border border-outline-variant bg-white mt-1">
+<span class="material-symbols-outlined text-primary text-sm">inventory_2</span>
+</div>
+<div class="flex-1 flex flex-col">
+<div class="flex justify-between items-start">
+<span class="font-body-md text-body-md font-semibold text-on-surface">+100 Premium Hoodie</span>
+<span class="font-label-md text-label-md text-on-surface-variant">10:42 AM</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">from Apparel Co.</span>
+<div class="flex items-center gap-xs mt-xs">
+<img class="w-4 h-4 rounded-full object-cover" data-alt="A tiny profile picture of John Warehouse Manager, professional lighting, corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1usaypblTtrdTs3PCH32zdpgHQtURJXurLuQfWZQvqWz3V4d6o0Ip_j0b_Q9MP3xj86hDIagZoJkxJ6EmUGKEZEEZaLTgkZtcD7Jxl0JrnUFLw4ax6nTsG0SvqrDFGDjAFUFpW8XiBsivij1DGxtGUc_287Y06rGrzZMDd8iUcrrfaUlbC02sofzfJ66aqRfU-KUAHlA-5Yb0iP4WQIFHOtAjv3XCh3PKLSKLobjWM9uy4vcZqcRq"/>
+<span class="font-label-md text-label-md text-outline">by John Warehouse Manager</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="relative z-10 flex gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center border border-outline-variant bg-white mt-1">
+<span class="material-symbols-outlined text-primary text-sm">inventory_2</span>
+</div>
+<div class="flex-1 flex flex-col">
+<div class="flex justify-between items-start">
+<span class="font-body-md text-body-md font-semibold text-on-surface">+500 USB-C Cables</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Yesterday</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">from TechSupply Inc.</span>
+<div class="flex items-center gap-xs mt-xs">
+<div class="w-4 h-4 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="font-label-md text-[8px] text-on-secondary-container">S</span>
+</div>
+<span class="font-label-md text-label-md text-outline">by Sarah Staff</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="relative z-10 flex gap-md">
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center border border-outline-variant bg-white mt-1">
+<span class="material-symbols-outlined text-error text-sm">warning</span>
+</div>
+<div class="flex-1 flex flex-col">
+<div class="flex justify-between items-start">
+<span class="font-body-md text-body-md font-semibold text-on-surface">Discrepancy: AirPods</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Oct 12</span>
+</div>
+<span class="font-body-md text-body-md text-error text-sm">Expected 50, Received 48</span>
+<div class="flex items-center gap-xs mt-xs">
+<img class="w-4 h-4 rounded-full object-cover" data-alt="A tiny profile picture of John Warehouse Manager, professional lighting, corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqJkHH2SMAsHUYnMaN0Bdm2dWixIp_socooopT8DayL2bOUNmKKjvN4OZE2--PgI1sv9jPatCJeYD-WuIze0N5r4fIgCvXaMQHs7Cg172ja58jHhvZoRNPDkteFm7nEEFtGI2syVw_rugJRONmF_eepzffyLEyTEkShOP2fUe8TzphLjlJxetMB7Naf_k4Gq8C4gyjmNzkp4xUuwsuvsWaarvctyprWuSMaFyqAnnpXycx1RPujC7e"/>
+<span class="font-label-md text-label-md text-outline">by John Warehouse Manager</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-md py-xs pb-safe bg-surface/80 dark:bg-surface-container-lowest/80 backdrop-blur-md shadow-lg border-t border-outline-variant dark:border-outline z-50 md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 p-sm" href="#">
+<span class="material-symbols-outlined mb-xs">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 p-sm" href="#">
+<span class="material-symbols-outlined mb-xs">inventory_2</span>
+<span class="font-label-md text-label-md">Products</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 p-sm" href="#">
+<span class="material-symbols-outlined mb-xs">point_of_sale</span>
+<span class="font-label-md text-label-md">Sell</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary after:rounded-full hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 p-sm" href="#">
+<span class="material-symbols-outlined mb-xs" style="font-variation-settings: 'FILL' 1;">shelves</span>
+<span class="font-label-md text-label-md">Inventory</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed active:scale-95 transition-transform duration-150 p-sm" href="#">
+<span class="material-symbols-outlined mb-xs">receipt_long</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+</nav>
+<!-- Spacer for mobile nav -->
+<div class="h-20 md:hidden bg-[#F8FAFC]"></div>
+</div>
+</body></html>
